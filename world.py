@@ -23,6 +23,8 @@ class World:
             for row in range(h // Tile.size):
                 column.append(Tile(col, row))
             self.tiles.append(column)
+        self.trees = []
+        self.crops = []
 
     def update_patterns(self):
         for column in self.tiles:
@@ -39,8 +41,8 @@ class World:
 
     def isWaterAt(self, x, y):
         # convert x and y to grid rows and columns
-        col = x // Tile.size
-        row = y // Tile.size
+        col = int(x) // Tile.size
+        row = int(y) // Tile.size
         # get the right tile
         tile = self.tiles[col][row]
         return tile.tileset == 0

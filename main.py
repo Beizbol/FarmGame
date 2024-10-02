@@ -6,13 +6,15 @@ from world import World
 
 def run():
     pygame.init()
+
     width = 640
     height = 640
-    fps = 15
+    fps = 60
+    rate = 15
+    frame = 0
+    clock = pygame.time.Clock()
     screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption("Farming Game!")
-
-    clock = pygame.time.Clock()
 
     player = Player()
     world = World(width, height)
@@ -64,6 +66,10 @@ def run():
                     world.paint_mode = False
 
         player.move(world)
+        # animate the player at 15fps
+        if frame > fps // rate:
+            player.animate()
+            frame = 0
 
         # draw the world
         world.draw(screen)
@@ -72,6 +78,7 @@ def run():
         # show everything we drew
         pygame.display.update()
         clock.tick(fps)
+        frame += 1
 
 
 if __name__ == "__main__":

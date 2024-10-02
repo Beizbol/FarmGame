@@ -5,57 +5,68 @@ class Player:
     size = 48
 
     def __init__(self):
-        self.speed = 3
-        self.vx = 0
-        self.vy = 0
-        self.x = 210
-        self.y = 120
+        self.speed = 1
+        # self.vx = 0
+        # self.vy = 0
+        self.v = pygame.math.Vector2()
+        self.pos = pygame.math.Vector2()
+        self.dir = "down"
+        self.state = "idle"
         self.frame = pygame.Rect(0, 0, self.size, self.size)
         self.sheet = pygame.image.load("assets/player/spritesheet.png").convert_alpha()
         self.surface = pygame.Surface((self.size, self.size), pygame.SRCALPHA)
 
     def press(self, dir):
         if dir == "up":
-            self.vy -= self.speed
+            self.v.y -= self.speed
         elif dir == "down":
-            self.vy += self.speed
+            self.v.y += self.speed
         elif dir == "left":
-            self.vx -= self.speed
+            self.v.x -= self.speed
         elif dir == "right":
-            self.vx += self.speed
+            self.v.x += self.speed
 
     def release(self, dir):
         if dir == "up":
-            self.vy += self.speed
+            self.v.y += self.speed
         elif dir == "down":
-            self.vy -= self.speed
+            self.v.y -= self.speed
         elif dir == "left":
-            self.vx += self.speed
+            self.v.x += self.speed
         elif dir == "right":
-            self.vx -= self.speed
+            self.v.x -= self.speed
 
     def move(self, world):
-        new_x = self.x + self.vx
-        new_y = self.y + self.vy
+        new_x = self.pos.x + self.v.x
+        new_y = self.pos.y + self.v.y
 
         # update our location by our speed
         if not world.isWaterAt(new_x + self.size, new_y + self.size + 10):
-            self.x = new_x
-            self.y = new_y
+            self.pos.x = new_x
+            self.pos.y = new_y
 
-        # animate
-        if self.vx == 0 and self.vy == 0:
+        if self.v.y > 0:  # down
+            self.dir = "down"
+        elif self.v.y < 0:  # up
+            self.dir = "up"
+        elif self.v.x > 0:  # right
+            self.dir = "right"
+        elif self.v.x < 0:  # left
+            self.dir = "left"
+
+    def animate(self):
+        if self.v.x == 0 and self.v.y == 0:
             self.frame.y = 0  # idle part of the sheet
         else:
             self.frame.y = self.size * 4  # walk part of the sheet
 
-        if self.vy > 0:  # down
+        if self.dir == "down":
             self.frame.y += self.size * 0  # idle part of the sheet
-        elif self.vy < 0:  # updd
+        elif self.dir == "up":
             self.frame.y += self.size * 1  # idle part of the sheet
-        elif self.vx > 0:  # right
+        elif self.dir == "right":
             self.frame.y += self.size * 2  # idle part of the sheet
-        elif self.vx < 0:  # lefd
+        elif self.dir == "left":
             self.frame.y += self.size * 3  # idle part of the sheet
 
         self.frame.x += self.size
@@ -67,4 +78,4 @@ class Player:
         self.surface.fill((0, 0, 0, 0))
         self.surface.blit(self.sheet, (0, 0), self.frame)
         surface = pygame.transform.scale_by(self.surface, 2)
-        screen.blit(surface, (self.x, self.y))
+        screen.blit(surface, self.pos)
