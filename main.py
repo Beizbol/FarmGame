@@ -5,11 +5,7 @@ from world import World
 
 
 def run():
-    (
-        a,
-        b,
-    ) = pygame.init()
-    print(a, b, "ab")
+    pygame.init()
     width = 640
     height = 640
     fps = 15

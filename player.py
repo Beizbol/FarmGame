@@ -39,7 +39,7 @@ class Player:
         new_y = self.y + self.vy
 
         # update our location by our speed
-        if not world.isWaterAt(new_x, new_y):
+        if not world.isWaterAt(new_x + self.size, new_y + self.size + 10):
             self.x = new_x
             self.y = new_y
 
@@ -66,7 +66,5 @@ class Player:
         # pygame.draw.rect(screen, "blue", self.frame)
         self.surface.fill((0, 0, 0, 0))
         self.surface.blit(self.sheet, (0, 0), self.frame)
-
         surface = pygame.transform.scale_by(self.surface, 2)
-
         screen.blit(surface, (self.x, self.y))

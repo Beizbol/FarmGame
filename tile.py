@@ -307,7 +307,7 @@ class Tile:
             sheet = pygame.transform.scale2x(sheet)
             self.sheets.append(sheet)
         Tile.water_sheet = self.sheets[0]
-        print("load sheets", self.sheets)
+        # print(self.sheets)
 
     def update(self, tiles):
         # print("updating tile:", row, col)
@@ -352,7 +352,7 @@ class Tile:
         except ValueError:
             print("No Match: ")
             for r in pattern:
-                print("pattern", r)
+                print(r)
 
     def draw(self, screen):
         sheet = self.sheets[self.tileset]
