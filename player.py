@@ -7,7 +7,6 @@ class Player:
     def __init__(self):
         self.speed = 5
         self.run = 1
-        # self.vy = 0
         self.v = pygame.math.Vector2()
         self.pos = pygame.math.Vector2()
         self.dir = "down"
