@@ -41,7 +41,7 @@ class Player:
         # update our location by our speed
         if not world.isWaterAt(new_x, new_y):
             self.x = new_x
-            self.y += new_y
+            self.y = new_y
 
         # animate
         if self.vx == 0 and self.vy == 0:
