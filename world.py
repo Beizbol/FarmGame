@@ -39,13 +39,12 @@ class World:
         row = y // Tile.size
         self.tiles[col][row].decor = Decor((x, y))
 
-    def isWaterAt(self, x, y):
+    def getTileAt(self, x, y):
         # convert x and y to grid rows and columns
         col = int(x) // Tile.size
         row = int(y) // Tile.size
         # get the right tile
-        tile = self.tiles[col][row]
-        return tile.tileset == 0
+        return self.tiles[col][row]
 
     def click(self, pos):
         # get the right tile

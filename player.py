@@ -69,8 +69,10 @@ class Player:
         elif self.v.x < 0:  # left
             self.dir = "left"
 
-        if self.action == "till" and tile.tileset == 4:
+        if self.action == "till" and 0 < tile.tileset < 5:
             tile.tileset = 5
+        elif self.action == "water" and tile.tileset == 5:
+            tile.tileset = 6
 
     def animate(self):
         if self.action == "till":
