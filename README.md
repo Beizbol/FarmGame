@@ -1,2 +1,0 @@
-# casg
-Pygame Student Repos
