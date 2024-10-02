@@ -5,8 +5,8 @@ class Player:
     size = 48
 
     def __init__(self):
-        self.speed = 1
-        # self.vx = 0
+        self.speed = 5
+        self.run = 1
         # self.vy = 0
         self.v = pygame.math.Vector2()
         self.pos = pygame.math.Vector2()
@@ -16,29 +16,36 @@ class Player:
         self.sheet = pygame.image.load("assets/player/spritesheet.png").convert_alpha()
         self.surface = pygame.Surface((self.size, self.size), pygame.SRCALPHA)
 
-    def press(self, dir):
-        if dir == "up":
+    def press(self, k):
+        if k == "up":
             self.v.y -= self.speed
-        elif dir == "down":
+        elif k == "down":
             self.v.y += self.speed
-        elif dir == "left":
+        elif k == "left":
             self.v.x -= self.speed
-        elif dir == "right":
+        elif k == "right":
             self.v.x += self.speed
+        elif k == "shift":
+            print("run")
+            self.run = 2
 
-    def release(self, dir):
-        if dir == "up":
+    def release(self, k):
+        if k == "up":
             self.v.y += self.speed
-        elif dir == "down":
+        elif k == "down":
             self.v.y -= self.speed
-        elif dir == "left":
+        elif k == "left":
             self.v.x += self.speed
-        elif dir == "right":
+        elif k == "right":
             self.v.x -= self.speed
+        elif k == "shift":
+            print("walk")
+            self.run = 1
 
     def move(self, world):
-        new_x = self.pos.x + self.v.x
-        new_y = self.pos.y + self.v.y
+        v = self.v.normalize() if self.v.magnitude() > 0 else self.v
+        new_x = self.pos.x + (v.x * self.run)
+        new_y = self.pos.y + (v.y * self.run)
 
         # update our location by our speed
         if not world.isWaterAt(new_x + self.size, new_y + self.size + 10):
@@ -57,6 +64,8 @@ class Player:
     def animate(self):
         if self.v.x == 0 and self.v.y == 0:
             self.frame.y = 0  # idle part of the sheet
+        elif self.run > 1:
+            self.frame.y = self.size * 8  # walk part of the sheet
         else:
             self.frame.y = self.size * 4  # walk part of the sheet
 

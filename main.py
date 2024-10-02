@@ -51,7 +51,7 @@ def run():
                 elif event.key == pygame.K_d:
                     player.press("right")
                 elif event.key == pygame.K_LSHIFT:
-                    player.press("Shift")
+                    player.press("shift")
                     world.paint_mode = True
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_w:
@@ -63,6 +63,7 @@ def run():
                 elif event.key == pygame.K_d:
                     player.release("right")
                 elif event.key == pygame.K_LSHIFT:
+                    player.release("shift")
                     world.paint_mode = False
 
         player.move(world)
