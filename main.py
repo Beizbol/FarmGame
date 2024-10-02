@@ -50,6 +50,12 @@ def run():
                     player.press("left")
                 elif event.key == pygame.K_d:
                     player.press("right")
+                elif event.key == pygame.K_t:
+                    player.press("t")
+                elif event.key == pygame.K_c:
+                    player.press("c")
+                elif event.key == pygame.K_SPACE:
+                    player.press("space")
                 elif event.key == pygame.K_LSHIFT:
                     player.press("shift")
                     world.paint_mode = True
@@ -62,11 +68,17 @@ def run():
                     player.release("left")
                 elif event.key == pygame.K_d:
                     player.release("right")
+                elif event.key == pygame.K_t:
+                    player.release("t")
+                elif event.key == pygame.K_c:
+                    player.release("c")
+                elif event.key == pygame.K_SPACE:
+                    player.release("space")
                 elif event.key == pygame.K_LSHIFT:
                     player.release("shift")
                     world.paint_mode = False
 
-        player.move(world)
+        player.update(world)
         # animate the player at 15fps
         if frame > fps // rate:
             player.animate()
