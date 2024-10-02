@@ -1,0 +1,36 @@
+Ideas for our cute farm game:
+
+Start:
+  - few coins
+  - the basic tools
+  - couple seeds
+
+
+Tools:
+  - Watering Can
+  - Axe
+  - Pickaxe
+  - Shovel
+  - Hoe
+  - Fishing Rod
+  - Tool Levels
+  - Tool Durability
+
+
+Item Shop:
+    
+  - Different Stalls/Shops
+  - Fishman
+  - Blacksmith
+  - Garden Store
+
+  Buy:
+    - Tools
+    - Seeds
+    - Levels/Islands/Worlds
+    - Custom Clothes
+
+  Sell: 
+    - Grow and Harvest Plants
+    - Clear out trees and plants and rocks
+      that are already on the island 
